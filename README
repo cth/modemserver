@@ -3,6 +3,28 @@ SMS messages via modems connected to a Moxa box.
 
 After receiving an SMS it parses it, extracting relevant fields,
 and sends the messages along via a HTTP based protocol.
-
 It has been tested with Siemens TC35 modems.
+
+
+The development of this project was sponsored by MimerGroup/MimerMobile,
+http://mimergroup.com. 
+
+Mimergroup delivers a range of services, software and hardware 
+related to SMS messaging. If your are looking for a reliable
+SMS vendor you can contact <khh@mimergroup.com>. 
+
+
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
