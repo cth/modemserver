@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# Main server
+# Christian Theil Have, Feb. 2008
+
+require 'utils.rb'
+die "No configuration file supplied" if ARGV.size < 1
+die "To many arguments" if ARGV.size > 1
+
+require 'server.rb'
+ModemServer.new(ARGV.shift).run

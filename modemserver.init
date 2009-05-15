@@ -1,0 +1,28 @@
+#!/bin/sh
+# Start/stop script for modemserver
+
+INSTDIR=/opt/modemserver
+CONFIG=/etc/modemserver.conf
+
+case x$1 in 
+	xstart)
+		echo "Starting ModemServer..."
+		test -x $INSTDIR/modemserver || echo "No modemserver executable!" 
+		cd $INSTDIR
+		./modemserver $CONFIG &> /dev/null & 
+		cd - &> /dev/null &
+		;;
+
+	xstop)
+		echo "Shutting down modemserver..."
+		kill -2 `pidof ruby`
+		;;
+	xrestart)
+		$0 stop
+		sleep 2
+		$0 start
+		;;	
+	*)
+		echo "use: [start|stop|restart]"
+		;;
+esac

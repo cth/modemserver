@@ -1,0 +1,8 @@
+This is a multithreaded modem server that receives
+SMS messages via modems connected to a Moxa box.
+
+After receiving an SMS it parses it, extracting relevant fields,
+and sends the messages along via a HTTP based protocol.
+
+It has been tested with Siemens TC35 modems.
+
