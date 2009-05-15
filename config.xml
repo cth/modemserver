@@ -1,26 +1,17 @@
 <config>
-	<logfile>/tmp/modemserver.log</logfile>
+	<logfile>/var/log/modemserver.log</logfile>
 
 	<!-- The port that the HTTP server listens on -->
 	<http-port>4321</http-port>
 
-	<modem name="21121703">
-		<server-address>192.168.239.89</server-address>
+	<modem name="12345678">
+		<server-address>127.0.0.1</server-address>
 		<!-- no pincode
    		  <pincode>2975</pincode>
 		-->
 		<port>4001</port>
-		<sendto>http://tryg.developmentserver.net/modemserver.php</sendto>
+		<sendto>http://localhost/sms.php</sendto>
 	</modem>
-	
-	<!--
-	<modem name="21121704">
-		<server-address>192.168.239.89</server-address>
-   		  <pincode>2975</pincode>
-		<port>4002</port>
-		<sendto>http://www.itu.dk/~cth/modemserver.php</sendto>
-	</modem>
-	-->
 
 </config>
 
