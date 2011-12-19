@@ -3,13 +3,13 @@
 
 def ia5(str)
     len = ((str.length/2) * (8.0/7.0)).round
-    
+
     pos = 0
     ia5 = []
     rest = 0
 
     0.upto(len-1) do |ia5pos|
-      shift = ia5pos%8 
+      shift = ia5pos%8
       if shift == 7 then
         ia5 << rest
         rest = 0

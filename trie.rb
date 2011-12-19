@@ -1,10 +1,10 @@
 class TrieNode < Hash
   attr_accessor :match
-  
+
   def match_symbol(symbol)
     self[symbol]
   end
-  
+
   def is_leaf?
     size == 0
   end
@@ -23,39 +23,39 @@ class TrieParser
         rest =  rest.slice 1..-1
 
         curnode[first] = TrieNode.new if curnode[first].nil?
-        
-        if rest.empty? then 
+
+        if rest.empty? then
           curnode[first].match = symbol
-          break 
+          break
         end
-        
+
         curnode = curnode[first]
       end
     end
   end
-  
+
   # Searches a string for the shortest symbol sequence using the trie.´
-  # Example: Build trie from 1:"a", 2:"b", 3:"ab", search using string "ababba" -> following sequence of symbols: 3,3,2,1 
+  # Example: Build trie from 1:"a", 2:"b", 3:"ab", search using string "ababba" -> following sequence of symbols: 3,3,2,1
   def parse(str)
     symbols = []
     trie = @root
     last_match = nil
     last_match_pos = 0
     pos = 0
-    
+
     while pos < str.length
       char = str.slice(pos)
       prev_trie = trie
       trie = trie[char] # transition
-      
+
       raise "Cannot match sequence #{char} #{prev_trie.inspect}" if trie.nil?
-      
+
       if trie.is_leaf?
         if not trie.match.nil?
           last_match = trie
           last_match_pos = pos
         end
-        
+
         raise "Cannot match sequence" if last_match.nil?
 
         symbols << last_match.match
@@ -72,7 +72,7 @@ class TrieParser
           end
         end
       end
-      
+
       pos = pos + 1
     end
     return symbols

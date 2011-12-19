@@ -1,5 +1,5 @@
-# The MoxaSimulator is a TCP server that simulates a moxa box with 
-# a number of modems connected to it 
+# The MoxaSimulator is a TCP server that simulates a moxa box with
+# a number of modems connected to it
 
 require 'socket'
 require 'utils.rb'
@@ -8,10 +8,10 @@ class SimulatedModem
   def initialize(port)
     @port = port
   end
-  
+
   def run
     puts "Simlated modem running on port #{@port}. Waiting for connections"
-    
+
     serv = TCPServer.new(@port)
     begin
       sock, client_addr = serv.accept
@@ -19,9 +19,9 @@ class SimulatedModem
       IO.select([serv])
       retry
     end
-    
+
     puts "Client connected from #{client_addr.to_s}. Waiting for commands."
-    
+
     loop do
       begin
         puts "waiting for commands:"
@@ -36,7 +36,7 @@ class SimulatedModem
       end
     end
   end
-  
+
   def process_request(req)
     if req =~ /AT\+CPIN=\d\d\d\d/
       "OK"
@@ -57,7 +57,7 @@ class MoxaSimulator
     @number_of_modems = num_modems
     @start_port = start_port
   end
-  
+
   def run
     puts "MoxaSimulator.run"
     threads = []
@@ -67,7 +67,7 @@ class MoxaSimulator
       modem = SimulatedModem.new(m+@start_port)
       threads << Thread.new { modem.run }
     end
-    
+
     threads.each { |t| t.join }
   end
 end

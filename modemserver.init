@@ -4,12 +4,12 @@
 INSTDIR=/opt/modemserver
 CONFIG=/etc/modemserver.conf
 
-case x$1 in 
+case x$1 in
 	xstart)
 		echo "Starting ModemServer..."
-		test -x $INSTDIR/modemserver || echo "No modemserver executable!" 
+		test -x $INSTDIR/modemserver || echo "No modemserver executable!"
 		cd $INSTDIR
-		./modemserver $CONFIG &> /dev/null & 
+		./modemserver $CONFIG &> /dev/null &
 		cd - &> /dev/null &
 		;;
 
@@ -21,7 +21,7 @@ case x$1 in
 		$0 stop
 		sleep 2
 		$0 start
-		;;	
+		;;
 	*)
 		echo "use: [start|stop|restart]"
 		;;

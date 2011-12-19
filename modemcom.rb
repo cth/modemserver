@@ -30,7 +30,7 @@ class ModemCommunicator
     @shutdown = false
     @to_delete = []
 
-    if @address.nil? or @address.empty? 
+    if @address.nil? or @address.empty?
       @logger.error @name + " No address specified!"
     end
 
@@ -71,15 +71,15 @@ class ModemCommunicator
     error_count = 0
 
     loop do
-      
+
       if @shutdown == true
         @logger.info @name + " shutting down..."
         break
       end
-      
+
       sleep 1
 
-      begin 
+      begin
         @logger.info "Trying to connect to #{@address} : #{@port}"
         connect
         @logger.info @name + " - connected"
@@ -94,7 +94,7 @@ class ModemCommunicator
 
         delete_messages
 
-        # We only send one message per iteration. We don't the sending 
+        # We only send one message per iteration. We don't the sending
         # of messages to block recieving messages
         sms = nil
         @outgoing_queue.synchronize { sms = @outgoing_queue.shift }
@@ -129,7 +129,7 @@ class ModemCommunicator
     @logger.debug "!!! SENDING PDU !!!"
     cmd "AT+CMGF=0"
     expect_ok or raise "send_pdu (#{@name}): could not set PDU mode"
-    # Check if modem supports SMS commands     
+    # Check if modem supports SMS commands
     cmd "AT+CSMS=0"
     expect_ok or raise "send_pdu (#{@name}): Modem doesn't support sending PDU's :-("
     # Send the PDU
@@ -145,7 +145,7 @@ class ModemCommunicator
 
     expect_ok
   end
-  
+
   def incoming_messages
     @to_delete = []
     @logger.info @name + " reading incoming messages"
@@ -163,13 +163,13 @@ class ModemCommunicator
 
         if line =~ /^\+CMGL:.*$/
           arr = (line.split(':'))[1].split(',')
-          index, stat, none, bytes = *arr 
+          index, stat, none, bytes = *arr
           @to_delete << index
           # next line contains actual messages
 
           line = readline_block(@socket)
           @logger.debug("pdu line:" + line)
-          begin 
+          begin
             pdus << PDU.new(line) unless line.nil?
           rescue Exception => pdu_exp
             @logger.error pdu_exp.inspect
@@ -190,7 +190,7 @@ class ModemCommunicator
 
   def delete_messages
     @logger.info @name + " deleting messages left on modem"
-    @logger.info @name + " no message to delete." if @to_delete.empty? 
+    @logger.info @name + " no message to delete." if @to_delete.empty?
     while not @to_delete.empty? do
       index = @to_delete.shift
       cmd "AT+CMGD="+index
@@ -201,7 +201,7 @@ class ModemCommunicator
       end
     end
   end
-  
+
   def write_pdu(pdu)
     sleep 0.1
     @logger.debug "writing pdu: " + pdu.encode
