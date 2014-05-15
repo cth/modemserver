@@ -8,11 +8,11 @@ if [ ! `whoami` == "root" ]; then
 fi
 
 if [ ! -d $INSTDIR ]; then
-	mkdir $INSTDIR	
+	mkdir $INSTDIR
 fi
 
 # copy files
-echo "Installing files to $INSTDIR" 
+echo "Installing files to $INSTDIR"
 cp * $INSTDIR
 
 echo "Installing init script (/etc/init.d/modemserver)"

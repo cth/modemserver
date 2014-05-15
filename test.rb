@@ -6,9 +6,9 @@ require 'trie.rb'
 
 class PDUParserTest < Test::Unit::TestCase
   def setup
-    # taken from: http://www.dreamfabric.com/sms/	  
+    # taken from: http://www.dreamfabric.com/sms/
     @raw1 = "07917283010010F5040BC87238880900F10000993092516195800AE8329BFD4697D9EC37"
-    @pdu1 = PDU.new(@raw1) # implicit invoke parser 
+    @pdu1 = PDU.new(@raw1) # implicit invoke parser
     @raw2 = "06915404939099440A915403322524000080207201406440A00500038E0201A8E5391D442FCFE9207A794E07D1CB733A885E9ED341F4F29C0EA297E77410BD3CA783E8E5391D442FCFE9207A794E07D1CB733A885E9ED341F4F29C0EA297E77410BD3CA783E8E5391D442FCFE9207A794E07D1CB733A885E9ED341F4F29C0EA297E77410BD3CA783E8E5391D442FCFE9207A794E07D1CB733A885E9ED341F4F29C0EA297E7"
     @pdu2 = PDU.new(@raw2)
     @raw3 = "06915404939099640A915403322524000080207201407440120500038E0202E8207A794E07D1CB733A"
@@ -18,9 +18,9 @@ class PDUParserTest < Test::Unit::TestCase
     puts @pdu4.inspect
 
 puts	PDU.new("06915404939099440A9154120659130000809061513404803F05000304020218E2F21C647ECB41EBBA1B248381D67217089406CDD16F38BCEC0695D9ECB21C940689DFE4B2DC5D76818E6F32681D6EC301").inspect
-    
+
   end
-  
+
   def test_inspect
     #puts @pdu2.inspect
     assert(true)
@@ -60,12 +60,12 @@ puts	PDU.new("06915404939099440A9154120659130000809061513404803F05000304020218E2
     assert(@pdu1.timestamp.min == 16)
     assert(@pdu1.timestamp.sec == 59)
   end
-  
+
   def test_udh_parsing
     assert(@pdu1.udh_present? == false)
     assert(@pdu2.udh_present)
     assert(@pdu3.udh_present)
-    
+
     assert(@pdu2.udh == "0500038E0201")
     assert(@pdu3.udh == "0500038E0202")
 
@@ -114,7 +114,7 @@ end
 class TrieParserTest < Test::Unit::TestCase
   def test_trie_parser_simple
     tp = TrieParser.new(["a", "b", "ab"])
-    assert([] == tp.parse(""))    
+    assert([] == tp.parse(""))
     assert(["ab", "ab"] == tp.parse("abab"))
     assert(["b", "ab"] == tp.parse("bab"))
     assert(["ab", "a"] == tp.parse("aba"))

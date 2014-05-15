@@ -22,7 +22,7 @@ end
 def readprompt(socket)
 	data = ""
 	while not data =~ /> /
-		data << socket.read(1)	
+		data << socket.read(1)
 	end
 end
 
@@ -35,7 +35,7 @@ def readline_block(socket)
 	line
 end
 
-def die(str) 
+def die(str)
 	puts str
 	exit -1
 end
